@@ -1,0 +1,67 @@
+<div class="dashboard-container">
+    <p-toolbar>
+      <div class="p-toolbar-group-left">
+        <h2>Dashboard</h2>
+      </div>
+      <div class="p-toolbar-group-right">
+        <button pButton label="Add Device" icon="pi pi-plus" (click)="showAddDeviceDialog()"></button>
+        <button pButton label="Logout" icon="pi pi-sign-out" (click)="authService.logout()" class="p-button-danger"></button>
+      </div>
+    </p-toolbar>
+  
+    <div class="grid mt-4">
+      @for (device of devices; track device.id) {
+        <div class="col-12 md:col-6 lg:col-4">
+          <p-card [header]="'Device ' + device.id" styleClass="mb-3">
+            <p-chart type="line" [data]="device.chartData"></p-chart>
+            <div class="flex justify-content-between mt-3">
+              <span>Temperature: {{ device.latestTemp }}°C</span>
+              <span>CO₂: {{ device.latestCo2 }} ppm</span>
+            </div>
+            <ng-template pTemplate="footer">
+              <button 
+                pButton 
+                label="View Details" 
+                icon="pi pi-search" 
+                (click)="navigateToDevice(device.id)"
+              ></button>
+            </ng-template>
+          </p-card>
+        </div>
+      }
+    </div>
+  
+    <p-dialog 
+      header="Add New Device" 
+      [(visible)]="displayAddDeviceDialog" 
+      [style]="{ width: '400px' }"
+      [modal]="true"
+    >
+      <div class="field">
+        <label for="deviceId">Device ID</label>
+        <input 
+          id="deviceId" 
+          type="text" 
+          pInputText 
+          [(ngModel)]="newDeviceCode" 
+          placeholder="Enter 6-digit device ID"
+        >
+      </div>
+      <ng-template pTemplate="footer">
+        <button 
+          pButton 
+          label="Cancel" 
+          icon="pi pi-times" 
+          (click)="displayAddDeviceDialog = false" 
+          class="p-button-text"
+        ></button>
+        <button 
+          pButton 
+          label="Add" 
+          icon="pi pi-check" 
+          (click)="addDevice()" 
+          [disabled]="!newDeviceCode || loading"
+        ></button>
+      </ng-template>
+    </p-dialog>
+  </div>
