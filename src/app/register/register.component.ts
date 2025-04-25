@@ -7,7 +7,6 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { NgClass } from '@angular/common';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -20,7 +19,6 @@ import { CommonModule } from '@angular/common';
     ButtonModule,
     ReactiveFormsModule,
     ProgressSpinnerModule,
-    NgClass,
     RouterLink,
     CommonModule
   ]
@@ -28,8 +26,6 @@ import { CommonModule } from '@angular/common';
 export class RegisterComponent {
   registerForm: FormGroup;
   loading = false;
-  username = '';
-  password = '';
 
   constructor(
     private fb: FormBuilder,
@@ -46,7 +42,7 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       this.loading = true;
       const { username, password } = this.registerForm.value;
-      this.authService.register({ username: this.username, password: this.password }).subscribe({
+      this.authService.register({ username, password}).subscribe({
         next: () => {
           this.loading = false;
         },

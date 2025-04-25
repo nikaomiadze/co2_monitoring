@@ -7,7 +7,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { NgClass } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
@@ -22,14 +22,14 @@ import { NgClass } from '@angular/common';
     ReactiveFormsModule,
     RouterLink,
     ProgressSpinnerModule,
-    NgClass
+    CommonModule
   ],
 })
 export class LoginComponent {
   loginForm: FormGroup;
   loading = false;
-  username = '';
-  password = '';
+isLoggedIn: any;
+ 
 
   constructor(
     private fb: FormBuilder,
@@ -46,13 +46,11 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.loading = true;
       const { username, password } = this.loginForm.value;
-      this.authService.login({ username: this.username, password: this.password }).subscribe({
-        next: () => {
+      this.authService.login({username, password}).subscribe(res=>{
           this.loading = false;
-        },
-        error: () => {
-          this.loading = false;
-        }
+          console.log(res.accessToken);
+          localStorage.setItem("Token",res.accessToken);
+          this.router.navigate(['/dashboard']);
       });
     }
   }

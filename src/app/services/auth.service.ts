@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private baseUrl = 'https://dockertest-production-65f4.up.railway.app/api';
+  private baseUrl = 'https://dockertest-production-65f4.up.railway.app/api/user';
 
   constructor(private http: HttpClient) {}
 
@@ -16,9 +16,6 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/login`, user);
   }
 
-  logout() {
-    localStorage.removeItem('token');
-  }
 
   saveToken(token: string) {
     localStorage.setItem('token', token);

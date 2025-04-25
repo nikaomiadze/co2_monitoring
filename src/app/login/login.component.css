@@ -1,0 +1,10 @@
+.login-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../assets/background.jpg');
+    background-size: cover;       /* Makes the image cover the entire container */
+    background-position: center;  /* Keeps the image centered */
+    background-repeat: no-repeat; /* Prevents tiling */
+}

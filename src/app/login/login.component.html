@@ -1,47 +1,49 @@
-<div class="login-container">
-    <p-card header="Login" styleClass="p-card-lg">
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <div class="field">
-          <label for="username">Username</label>
-          <input 
-            id="username" 
-            type="text" 
-            pInputText 
-            formControlName="username"
-            [ngClass]="{ 'p-invalid': loginForm.get('username')?.invalid && loginForm.get('username')?.touched }"
-          >
-          @if (loginForm.get('username')?.invalid && loginForm.get('username')?.touched) {
-            <small class="p-error">Username is required</small>
-          }
+<div class="login-container" *ngIf="!isLoggedIn">
+  <div class="login-card">
+    <h2 class="card-header">შესვლა</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">მომხმარებლის სახელი</label>
+        <input 
+          id="username" 
+          type="text" 
+          class="form-control" 
+          formControlName="username"
+          [class.invalid]="loginForm.get('username')?.invalid && loginForm.get('username')?.touched"
+        >
+        <div class="error-message" *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+          *მომხმარებლის სახელი სავალდებულოა
         </div>
-  
-        <div class="field">
-          <label for="password">Password</label>
-          <input 
-            id="password" 
-            type="password" 
-            pPassword 
-            formControlName="password"
-            [ngClass]="{ 'p-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched }"
-          >
-          @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
-            <small class="p-error">Password is required</small>
-          }
+      </div>
+
+      <div class="form-group">
+        <label for="password">პაროლი</label>
+        <input 
+          id="password" 
+          type="password" 
+          class="form-control" 
+          formControlName="password"
+          [class.invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+        >
+        <div class="error-message" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+          *პაროლი სავალდებულოა
         </div>
-  
-        <div class="flex justify-content-between align-items-center mt-4">
-          <button 
-            pButton 
-            type="submit" 
-            label="Login" 
-            [disabled]="loginForm.invalid || loading"
-          ></button>
-          <a routerLink="/register">Register</a>
-        </div>
-  
-        @if (loading) {
-          <p-progressSpinner styleClass="w-2rem h-2rem"></p-progressSpinner>
-        }
-      </form>
-    </p-card>
+      </div>
+
+      <div class="form-footer">
+        <button 
+          type="submit" 
+          class="btn btn-primary"
+          [disabled]="loginForm.invalid || loading"
+        >
+          შესვლა
+        </button>
+        <a routerLink="/register" class="link">რეგისტრაცია</a>
+      </div>
+
+      <div class="spinner-container" *ngIf="loading">
+        <div class="spinner"></div>
+      </div>
+    </form>
   </div>
+</div>

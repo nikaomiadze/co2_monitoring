@@ -31,11 +31,16 @@ import { DeviceService } from '../services/device.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  devices: Device[] = [];
+  devices = [
+    { id: 1, latestTemp: 22, latestCo2: 450, chartData: {} },
+    { id: 2, latestTemp: 24, latestCo2: 500, chartData: {} },
+    { id: 3, latestTemp: 21, latestCo2: 420, chartData: {} }
+  ];
   displayAddDeviceDialog = false;
   newDeviceCode = '';
   newDeviceTitle = '';
   username = '';  loading = false;
+  isLoggedIn: boolean=true;
 
   constructor(
     public authService: AuthService,
@@ -74,7 +79,11 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  navigateToDevice(deviceId: string) {
+  navigateToDevice(deviceId: number) {
     this.router.navigate(['/device', deviceId]);
+  }
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 }
