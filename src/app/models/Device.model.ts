@@ -1,8 +1,10 @@
 export interface Device {
     id: string;
     username?: string;
-    deviceid?: string;
+    deviceId: string;
     chartData?: string;
-    latestTemp?:string;
+    latestTemp:string;
     latestCo2?:string;
+    humidity?:string;
+    title:string;
   }

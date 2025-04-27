@@ -7,32 +7,48 @@
       </div>
       <div class="toolbar-right">
         <button class="btn btn-primary" (click)="showAddDeviceDialog()">
-          <i class="icon-plus"></i> Add Device
+          <i class="fas fa-plus"></i>მოწყობილობის დამატება
         </button>
         <button class="btn btn-danger" (click)="logout()">
-          <i class="icon-logout"></i> Logout
+          <i class="fas fa-sign-out-alt"></i> გასვლა
         </button>
       </div>
     </div>
 
     <div class="devices-grid">
-      <div class="device-card" *ngFor="let device of devices">
+      <div class="device-card" *ngFor="let device of devices;let i = index">
         <div class="card-header">
-          <h3>Device {{ device.id }}</h3>
+          <h3> {{ device.title}}</h3>
         </div>
         <div class="card-body">
+          <div class="instruction">
+            <div class="flex">
+            <div class="rectangle1"></div>
+            <span>უსაფრთხო ზღვარი</span>
+            </div>
+            <div class="flex">
+              <div class="rectangle2"></div>
+              <span>ამჟამინდელი პარამეტრი</span>
+            </div>
+
+
+
+          </div>
           <div class="chart-container">
-            <!-- You can implement your own chart here or use a different library -->
+            <canvas [id]="'tempPieChart' + i"></canvas>
+            <canvas [id]="'co2PieChart' + i"></canvas>
+            <canvas [id]="'humidityPieChart' + i"></canvas>
             <div class="chart-placeholder"></div>
           </div>
           <div class="device-stats">
-            <span>Temperature: {{ device.latestTemp }}°C</span>
-            <span>CO₂: {{ device.latestCo2 }} ppm</span>
-          </div>
+            <span>ტემპერატურა: {{device.latestTemp}}°C</span>
+            <span>ნახშირორჟანგი: {{device.latestCo2}} ppm</span>
+            <span>ტენიანობა: {{device.humidity}}%</span>
+      </div>
         </div>
         <div class="card-footer">
-          <button class="btn btn-secondary" (click)="navigateToDevice(device.id)">
-            <i class="icon-search"></i> View Details
+          <button class="btn btn-secondary" (click)="getDevice()" >
+            <i class="fas fa-refresh"></i> პარამეტრების განახლება
           </button>
         </div>
       </div>
@@ -42,31 +58,38 @@
     <div class="dialog-overlay" *ngIf="displayAddDeviceDialog">
       <div class="dialog">
         <div class="dialog-header">
-          <h3>Add New Device</h3>
-          <button class="close-btn" (click)="displayAddDeviceDialog = false">&times;</button>
+          <h3>მოწყობილობის დამატება</h3>
+          <button class="fas fa-close fa-2x" (click)="displayAddDeviceDialog = false"></button>
         </div>
         <div class="dialog-body">
-          <div class="form-group">
-            <label for="deviceId">Device ID</label>
+          <div class="dialog-form">
+            <label for="deviceId">მოწყობილობის დასახელება</label>
+            <input 
+              id="deviceTitle" 
+              type="text" 
+              class="dialog-input" 
+              [(ngModel)]="newDeviceTitle" 
+            >
+
+            <label for="deviceId">მოწყობილობის ID</label>
             <input 
               id="deviceId" 
               type="text" 
-              class="form-control" 
+              class="dialog-input" 
               [(ngModel)]="newDeviceCode" 
-              placeholder="Enter 6-digit device ID"
             >
           </div>
         </div>
         <div class="dialog-footer">
           <button class="btn btn-text" (click)="displayAddDeviceDialog = false">
-            Cancel
+            დახურვა
           </button>
           <button 
             class="btn btn-primary" 
             (click)="addDevice()" 
             [disabled]="!newDeviceCode || loading"
           >
-            Add
+            დამატება
           </button>
         </div>
       </div>

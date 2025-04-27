@@ -14,7 +14,7 @@
             [class.is-invalid]="registerForm.get('username')?.invalid && registerForm.get('username')?.touched"
             formControlName="username"
           >
-          <div *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched" class="invalid-feedback">
+          <div *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched" class="error-message">
             *მომხმარებლის სახელი სავალდებულოა
           </div>
         </div>
@@ -28,10 +28,10 @@
             [class.is-invalid]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
             formControlName="password"
           >
-          <div *ngIf="registerForm.get('password')?.errors?.['required'] && registerForm.get('password')?.touched" class="invalid-feedback">
+          <div *ngIf="registerForm.get('password')?.errors?.['required'] && registerForm.get('password')?.touched" class="error-message">
             *პაროლი სავალდებულოა
           </div>
-          <div *ngIf="registerForm.get('password')?.errors?.['minlength'] && registerForm.get('password')?.touched" class="invalid-feedback">
+          <div *ngIf="registerForm.get('password')?.errors?.['minlength'] && registerForm.get('password')?.touched" class="error-message">
             *პაროლი უნდა იყოს 6 ციფრზე მეტი.
           </div>
         </div>
@@ -44,11 +44,11 @@
           >
             რეგისტრაცია
           </button>
-          <a [routerLink]="['/login']" class="btn btn-link">შესვლა</a>
+          <a [routerLink]="['/login']" class="link">შესვლა</a>
         </div>
   
-        <div *ngIf="loading" class="spinner-border text-primary mt-3" role="status">
-          <span class="visually-hidden">Loading...</span>
+        <div class="spinner-container" *ngIf="loading">
+          <div class="spinner"></div>
         </div>
       </form>
     </div>

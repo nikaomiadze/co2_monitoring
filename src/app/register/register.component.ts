@@ -42,12 +42,21 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       this.loading = true;
       const { username, password } = this.registerForm.value;
-      this.authService.register({ username, password}).subscribe({
+      
+      this.authService.register({ username, password }).subscribe({
         next: () => {
           this.loading = false;
+          this.router.navigate(['/login']);
         },
-        error: () => {
+        error: (err) => {
           this.loading = false;
+          
+          if (err.status === 400 && err.error === 'Username already exists') {
+            alert('მომხმარებელი ამ სახელით უკვე არსებობს.');
+          } 
+          else {
+            alert('რეგისტრაცია ვერ მოხერხდა, გთხოვთ სცადოთ მოგვიანებით.');
+          }
         }
       });
     }
