@@ -7,4 +7,5 @@ export interface Device {
     latestCo2?:string;
     humidity?:string;
     title:string;
+    time?:string;
   }

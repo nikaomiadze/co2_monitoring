@@ -75,13 +75,16 @@ export class DashboardComponent implements OnInit {
         const deviceRequests = devices.map((device: Device) => {
           return this.sensorService.getDataByDeviceId(device.deviceId).toPromise().then((sensorDataArray: any[]) => {
             sensorDataArray.forEach((sensorData: any) => {
+              const formattedTime = this.formatTimestamp(sensorData.timestamp);
               const updatedDevice: Device = {
                 ...device,
                 latestTemp: sensorData.temperature?.toString() || '0',
                 latestCo2: sensorData.cO2?.toString() || '0',
                 humidity: sensorData.humidity?.toString() || '0',
+                time: formattedTime || '0',               
                 chartData: JSON.stringify(sensorData)
               };
+              console.log(sensorData);
               this.devices.push(updatedDevice);
             });
           });
@@ -138,7 +141,7 @@ export class DashboardComponent implements OnInit {
             datasets: [
               {
                 data: [ humidity, 100 - humidity ],
-                backgroundColor: ['#00CED1', '#E5E5E5'],
+                backgroundColor: ['#32CD32', '#E5E5E5'],
                 borderWidth: 0,
               },
             ],
@@ -147,6 +150,28 @@ export class DashboardComponent implements OnInit {
         });
       });
     }, 0);
+  }
+  private formatTimestamp(isoString: string): string {
+    if (!isoString) return '';
+    
+    try {
+      const date = new Date(isoString);
+      
+      // Get hours and minutes (pad with leading zero if needed)
+      const hours = date.getHours().toString().padStart(2, '0');
+      const minutes = date.getMinutes().toString().padStart(2, '0');
+      
+      // Get month, day, and year (month is 0-indexed)
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      const year = date.getFullYear();
+      
+      // Return formatted string: "hh:mm mm/dd/yyyy"
+      return `${hours}:${minutes} ${month}/${day}/${year}`;
+    } catch (e) {
+      console.error('Error formatting timestamp:', e);
+      return isoString; // Return original if formatting fails
+    }
   }
   
   logout() {

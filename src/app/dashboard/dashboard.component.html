@@ -3,7 +3,7 @@
   <div class="dashboard-container" *ngIf="isLoggedIn">
     <div class="toolbar">
       <div class="toolbar-left">
-        <h2>Dashboard</h2>
+        <h2>გარემოს მონიტორინგი</h2>
       </div>
       <div class="toolbar-right">
         <button class="btn btn-primary" (click)="showAddDeviceDialog()">
@@ -35,21 +35,27 @@
 
           </div>
           <div class="chart-container">
-            <canvas [id]="'tempPieChart' + i"></canvas>
-            <canvas [id]="'co2PieChart' + i"></canvas>
-            <canvas [id]="'humidityPieChart' + i"></canvas>
-            <div class="chart-placeholder"></div>
+            <div class="flex1">
+              <canvas [id]="'tempPieChart' + i"></canvas>
+              <span>ტემპერატურა:<br> {{device.latestTemp}}°C</span>
+            </div>
+            <div class="flex1">
+              <canvas [id]="'co2PieChart' + i"></canvas>
+              <span>ნახშირორჟანგი:<br> {{device.latestCo2}} ppm</span>
+            </div>
+            <div class="flex1">
+              <canvas [id]="'humidityPieChart' + i"></canvas>
+              <span>ტენიანობა:<br> {{device.humidity}}%</span>
+            </div>
           </div>
-          <div class="device-stats">
-            <span>ტემპერატურა: {{device.latestTemp}}°C</span>
-            <span>ნახშირორჟანგი: {{device.latestCo2}} ppm</span>
-            <span>ტენიანობა: {{device.humidity}}%</span>
-      </div>
         </div>
         <div class="card-footer">
           <button class="btn btn-secondary" (click)="getDevice()" >
             <i class="fas fa-refresh"></i> პარამეტრების განახლება
           </button>
+        </div>
+        <div class="refresh_date"> 
+          <span>განახლების დრო: {{device.time}}</span>
         </div>
       </div>
     </div>
