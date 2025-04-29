@@ -91,7 +91,6 @@ export class DashboardComponent implements OnInit {
         });
   
         Promise.all(deviceRequests).then(() => {
-          // When all sensor data is loaded, THEN draw the charts
           this.drawCharts();
         });
   
@@ -118,7 +117,7 @@ export class DashboardComponent implements OnInit {
               },
             ],
           },
-          options: { responsive: true, cutout: '70%' }
+          options: { responsive: true, cutout: '0%' }
         });
   
         new Chart('co2PieChart' + index, { 
@@ -132,7 +131,7 @@ export class DashboardComponent implements OnInit {
               },
             ],
           },
-          options: { responsive: true, cutout: '70%' }
+          options: { responsive: true, cutout: '0%' }
         });
   
         new Chart('humidityPieChart' + index, { 
@@ -146,7 +145,7 @@ export class DashboardComponent implements OnInit {
               },
             ],
           },
-          options: { responsive: true, cutout: '70%' }
+          options: { responsive: true, cutout: '0%' }
         });
       });
     }, 0);

@@ -28,7 +28,7 @@
     color: #080e26;
     margin: 0;
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: bold;
   }
   
   .devices-grid {
@@ -129,8 +129,8 @@
     .flex1 canvas {
       width: 100%; /* Makes the canvas width adjust to the parent */
       height: auto; /* Automatically adjusts the height to maintain aspect ratio */
-      max-width: 130px; /* Maximum width for small screens */
-      max-height: 130px; /* Maximum height for small screens */
+      max-width: 120px; /* Maximum width for small screens */
+      max-height: 120px; /* Maximum height for small screens */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -235,7 +235,7 @@
       justify-content: space-between;
     }
     .toolbar-right button{
-      font-size: 12px;
+      font-size: 11px;
     }
     .chart-container{
       gap: 5px;
@@ -243,7 +243,7 @@
     }
     .flex span{
       text-align: center;
-      font-size: 9px;
+      font-size: 8px;
       max-width: 110px;
     }
     .rectangle1{

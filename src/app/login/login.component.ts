@@ -46,11 +46,20 @@ isLoggedIn: any;
     if (this.loginForm.valid) {
       this.loading = true;
       const { username, password } = this.loginForm.value;
-      this.authService.login({username, password}).subscribe(res=>{
+      this.authService.login({username, password}).subscribe({
+        next: (res) => {
           this.loading = false;
-          console.log(res.accessToken);
-          localStorage.setItem("Token",res.accessToken);
+          localStorage.setItem('Token', res.accessToken);
           this.router.navigate(['/dashboard']);
+        },
+        error: (err) => {
+          this.loading = false;
+          if(err.status==401){
+            alert("მომხმარებლის სახელი ან პაროლი არასწორია.");
+          }else if(err.status==500){
+            alert("სისტემური ხარვეზი, გთხოვთ სცადოთ მოგვიანებით.");
+          }
+        }
       });
     }
   }
