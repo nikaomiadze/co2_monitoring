@@ -156,20 +156,17 @@ export class DashboardComponent implements OnInit {
     try {
       const date = new Date(isoString);
       
-      // Get hours and minutes (pad with leading zero if needed)
-      const hours = date.getHours().toString().padStart(2, '0');
-      const minutes = date.getMinutes().toString().padStart(2, '0');
+      // Use UTC methods instead of local time
+      const hours = date.getUTCHours().toString().padStart(2, '0');
+      const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+      const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+      const day = date.getUTCDate().toString().padStart(2, '0');
+      const year = date.getUTCFullYear();
       
-      // Get month, day, and year (month is 0-indexed)
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const day = date.getDate().toString().padStart(2, '0');
-      const year = date.getFullYear();
-      
-      // Return formatted string: "hh:mm mm/dd/yyyy"
       return `${hours}:${minutes} ${month}/${day}/${year}`;
     } catch (e) {
       console.error('Error formatting timestamp:', e);
-      return isoString; // Return original if formatting fails
+      return isoString;
     }
   }
   
