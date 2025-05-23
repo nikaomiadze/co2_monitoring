@@ -93,7 +93,6 @@ body {
 
 .btn-text {
   background: transparent;
-  color: var(--primary-color);
 }
 
 .btn-text:hover {

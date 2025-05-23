@@ -175,7 +175,7 @@
   }
   
   .dialog-header {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    background: #080e26;
     color: white;
     border-radius: var(--border-radius) var(--border-radius) 0 0;
     display: flex;
@@ -213,7 +213,7 @@
     padding: 10px;
   }
   .dialog-form label{
-    color: var(--primary-color);
+    color:#080e26;
   }
   
   
