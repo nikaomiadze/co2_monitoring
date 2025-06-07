@@ -112,7 +112,10 @@ export class DashboardComponent implements OnInit {
             datasets: [
               {
                 data: [ temp, 40 - temp ],
-                backgroundColor: ['#32CD32', '#E5E5E5'],
+                backgroundColor: [
+                          temp > 25 ? '#FF0000' : '#32CD32',
+                          '#E5E5E5'
+                        ],
                 borderWidth: 0,
               },
             ],
@@ -126,7 +129,10 @@ export class DashboardComponent implements OnInit {
             datasets: [
               {
                 data: [ co2, 1000 - co2 ],
-                backgroundColor: ['#32CD32', '#E5E5E5'],
+                backgroundColor: [
+                          co2 > 700 ? '#FF0000' : '#32CD32',
+                          '#E5E5E5'
+                        ],
                 borderWidth: 0,
               },
             ],
@@ -140,7 +146,10 @@ export class DashboardComponent implements OnInit {
             datasets: [
               {
                 data: [ humidity, 70 - humidity ],
-                backgroundColor: ['#32CD32', '#E5E5E5'],
+                backgroundColor: [
+                          humidity > 60 ? '#FF0000' : '#32CD32',
+                          '#E5E5E5'
+                        ],
                 borderWidth: 0,
               },
             ],
