@@ -75,16 +75,22 @@
     border-bottom: 15px;
   }
   .rectangle1{
-    width: 35px;
+    width: 30px;
     height: 15px;
     background-color: #E5E5E5;
-    margin-right: 10px;
+    margin-right: 5px;
   }
   .rectangle2{
-    width: 35px;
+    width: 30px;
     height: 15px;
     background-color:#32CD32;
-    margin-right: 10px;
+    margin-right: 5px;
+  }
+  .rectangle3{
+    width: 30px;
+    height: 15px;
+    background-color:#FF0000;
+    margin-right: 5px;
   }
   .flex{
     display: flex;
@@ -92,6 +98,7 @@
   }
   .instruction span{
     color: #080e26;
+    font-size: 11px;
   }
   
   .chart-container {
